@@ -2,61 +2,64 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Days
+{
+    Mon=3,
+    Tue
+}
 public class MainPlayer : MonoBehaviour
 {
-
-    [SerializeField] private float Speed = 0.06f ;
-    [SerializeField] private Sprite TarSp;
-    [SerializeField] private Sprite BarSp;
-    [SerializeField] private bool Switch = false;
-    [SerializeField] private float SizeX;
-    [SerializeField] private float SizeY;
+    [SerializeField] private float speed = 0.5f;
+    [SerializeField] private Sprite tarSp = null;
     private SpriteRenderer _spriteRenderer = null;
+    private bool T=true;
+    [SerializeField] private Sprite Ranibow = null;
     
-
-    void Start()
+    // Start is called before the first frame update
+    private void Start()
     {
+        while (true) ;
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    void Update()
+    // Update is called once per frame
+    private void Update()
     {
-        if (Input.GetKey(KeyCode.W))
-        {
-            transform.Translate(Vector3.up * Speed);
-        }
         if (Input.GetKey(KeyCode.A))
         {
-            transform.Translate(Vector3.left * Speed);
+            transform.Translate(Vector3.left * speed);
+        }
+        if (Input.GetKey(KeyCode.W))
+        {
+            transform.Translate(Vector3.up * speed);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            transform.Translate(Vector3.right * Speed);
+            transform.Translate(Vector3.right * speed);
         }
         if (Input.GetKey(KeyCode.S))
         {
-            transform.Translate(Vector3.down * Speed);
+            transform.Translate(Vector3.down * speed);
         }
-
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (Switch)
+            
+            
+            
+            if (T)
             {
-                _spriteRenderer.sprite = TarSp;
-                SizeX /= 25f;
-                SizeY /= 25f;
-                gameObject.transform.localScale = new Vector3(SizeX , SizeY, 0);
-                Switch = !Switch;
+                _spriteRenderer.sprite = Ranibow;
             }
             else
             {
-                _spriteRenderer.sprite = BarSp;
-                SizeX *= 25f;
-                SizeY *=  25f;
-                gameObject.transform.localScale = new Vector3(SizeX, SizeY, 0);
-                Switch = !Switch;
+                _spriteRenderer.sprite = tarSp;
+                
             }
+            T = !T;
+            
         }
+            
+
     }
 }
